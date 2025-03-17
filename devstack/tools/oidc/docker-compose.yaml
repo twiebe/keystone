@@ -23,6 +23,7 @@ services:
       - "8443:8443"
     volumes:
             - DEVSTACK_DEST:/etc/certs:rw
+    restart: always
 
   keycloak-database:
     image: quay.io/metal3-io/mariadb:latest
@@ -31,3 +32,4 @@ services:
       MARIADB_DATABASE: keycloak
       MARIADB_USER: keycloak
       MARIADB_PASSWORD: nomoresecret
+    restart: always
