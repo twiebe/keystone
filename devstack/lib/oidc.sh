@@ -114,6 +114,43 @@ function register_federation {
     openstack identity provider create \
         --remote-id $OIDC_ISSUER_BASE \
         --domain $DOMAIN_NAME $IDP_ID
+
+    cat > /tmp/rules.json <<EOF
+    [
+        {
+            "local": [
+                {
+                    "user": {
+                        "name": "{0}"
+                    },
+                    "group": {
+                        "domain": {
+                            "name": "Default"
+                        },
+                        "name": "federated_users"
+                    }
+                }
+            ],
+            "remote": [
+                {
+                    "type": "REMOTE_USER"
+                }
+            ]
+        }
+    ]
+    EOF
+
+    openstack mapping create \
+        --rules /tmp/rules.json \
+        sso_mapping
+
+    rm /tmp/rules.json
+
+    openstack federation protocol create \
+        --identity-provider sso \
+        --mapping sso_mapping \
+        openid
+
 }
 
 function configure_tests_settings {
@@ -156,4 +193,3 @@ function uninstall_federation {
         echo "Skipping uninstallation of OIDC federation for non ubuntu nor fedora nor suse host"
     fi
 }
-
