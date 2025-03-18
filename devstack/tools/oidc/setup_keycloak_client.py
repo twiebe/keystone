@@ -5,6 +5,7 @@ KEYCLOAK_USERNAME = os.environ.get('KEYCLOAK_USERNAME')
 KEYCLOAK_PASSWORD = os.environ.get('KEYCLOAK_PASSWORD')
 KEYCLOAK_URL = os.environ.get('KEYCLOAK_URL')
 HOST_IP = os.environ.get('HOST_IP', 'localhost')
+REDIRECT_URI = os.environ.get('REDIRECT_URI')
 
 
 class KeycloakClient:
@@ -53,8 +54,7 @@ def main():
     c = KeycloakClient()
 
     redirect_uris = [
-        f'http://{HOST_IP}/identity/v3/auth/OS-FEDERATION/identity_providers/sso/protocols/openid/websso',
-        f'http://{HOST_IP}/identity/v3/auth/OS-FEDERATION/websso/openid',
+        REDIRECT_URI,
     ]
 
     c.create_client('master', 'devstack', 'nomoresecret', redirect_uris)

@@ -86,6 +86,7 @@ function configure_federation {
             KEYCLOAK_USERNAME="admin" \
             KEYCLOAK_PASSWORD="nomoresecret" \
             HOST_IP="$HOST_IP" \
+            REDIRECT_URI="$REDIRECT_URI" \
             python3 $OIDC_PLUGIN/tools/oidc/setup_keycloak_client.py
     fi
 
