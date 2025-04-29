@@ -117,29 +117,29 @@ function register_federation {
         --domain $DOMAIN_NAME $IDP_ID
 
     cat > /tmp/rules.json <<EOF
-    [
-        {
-            "local": [
-                {
-                    "user": {
-                        "name": "{0}"
+[
+    {
+        "local": [
+            {
+                "user": {
+                    "name": "{0}"
+                },
+                "group": {
+                    "domain": {
+                        "name": "Default"
                     },
-                    "group": {
-                        "domain": {
-                            "name": "Default"
-                        },
-                        "name": "federated_users"
-                    }
+                    "name": "federated_users"
                 }
-            ],
-            "remote": [
-                {
-                    "type": "REMOTE_USER"
-                }
-            ]
-        }
-    ]
-    EOF
+            }
+        ],
+        "remote": [
+            {
+                "type": "REMOTE_USER"
+            }
+        ]
+    }
+]
+EOF
 
     openstack mapping create \
         --rules /tmp/rules.json \
