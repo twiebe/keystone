@@ -56,7 +56,7 @@ function configure_federation {
     # Specify the header that contains information about the identity provider
     iniset $KEYSTONE_CONF openid remote_id_attribute "HTTP_OIDC_ISS"
     iniset $KEYSTONE_CONF auth methods "password,token,openid,application_credential"
-    iniset $KEYSTONE_CONF federation trusted_dashboard "https://$HOST_IP/auth/websso/"
+    iniset $KEYSTONE_CONF federation trusted_dashboard "http://$HOST_IP/dashboard/auth/websso/"
 
     cp $DEST/keystone/etc/sso_callback_template.html /etc/keystone/
 
