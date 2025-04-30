@@ -31,7 +31,7 @@ MAPPING_REMOTE_TYPE=${MAPPING_REMOTE_TYPE:-OIDC-preferred_username}
 MAPPING_USER_NAME=${MAPPING_USER_NAME:-"{0}"}
 PROTOCOL_ID=${PROTOCOL_ID:-openid}
 
-REDIRECT_URI="https://$HOST_IP/identity/v3/auth/OS-FEDERATION/identity_providers/$IDP_ID/protocols/openid/websso"
+REDIRECT_URI="https://$HOST_IP/identity/v3/redirect_uri"
 
 OIDC_PLUGIN="$DEST/keystone/devstack"
 
